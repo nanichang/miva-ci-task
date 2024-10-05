@@ -1,15 +1,19 @@
-name: Python Palindrome CI
+name: Add and Substract CI
 
 on:
   push:
     branches:
       - main
+      - development
+      - staging
   pull_request:
     branches:
       - main
+      - development
+      - staging
 
 jobs:
-  test:
+  substract:
     runs-on: ubuntu-latest
 
     steps:
@@ -26,3 +30,20 @@ jobs:
 
       - name: Run tests
         run: python -m unittest discover
+  add:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.x"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run tests
+        run: echo "2+2"
